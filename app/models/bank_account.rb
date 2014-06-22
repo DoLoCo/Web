@@ -7,6 +7,7 @@ class BankAccount < ActiveRecord::Base
   belongs_to :ownable, polymorphic: true
 
   has_many :campaigns
+  has_many :donations
 
   validates :nickname, presence: true
 

@@ -10,6 +10,8 @@ class Campaign < ActiveRecord::Base
   belongs_to :organization
   belongs_to :bank_account
 
+  has_many :donations
+
   validates :title, presence: true
   validates :description, presence: true
 

@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   has_many :bank_accounts, as: :ownable
   has_many :organization_admins
   has_many :organizations, through: :organization_admins
-  
+  has_many :donations
+
   validates :email, presence: true, 
                     uniqueness: true,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }

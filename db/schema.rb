@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622215537) do
+ActiveRecord::Schema.define(version: 20140622221318) do
 
   create_table "bank_accounts", force: true do |t|
     t.string   "nickname"
@@ -37,6 +37,19 @@ ActiveRecord::Schema.define(version: 20140622215537) do
 
   add_index "campaigns", ["bank_account_id"], name: "index_campaigns_on_bank_account_id", using: :btree
   add_index "campaigns", ["organization_id"], name: "index_campaigns_on_organization_id", using: :btree
+
+  create_table "donations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "bank_account_id"
+    t.integer  "campaign_id"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "donations", ["bank_account_id"], name: "index_donations_on_bank_account_id", using: :btree
+  add_index "donations", ["campaign_id"], name: "index_donations_on_campaign_id", using: :btree
+  add_index "donations", ["user_id"], name: "index_donations_on_user_id", using: :btree
 
   create_table "organization_admins", force: true do |t|
     t.integer  "user_id"
