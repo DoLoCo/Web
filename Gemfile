@@ -12,6 +12,7 @@ gem 'jquery-rails'
 #gem 'devise'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
+gem 'balanced'
 gem 'active_model_serializers'
 
 group :development do
