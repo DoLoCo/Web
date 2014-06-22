@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20140622213145) do
   create_table "organizations", force: true do |t|
     t.string   "name"
     t.string   "website"
+    t.string   "phone_number"
     t.text     "description"
     t.string   "address_line1"
     t.string   "address_line2"
