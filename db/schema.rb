@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622213646) do
+ActiveRecord::Schema.define(version: 20140622214727) do
+
+  create_table "bank_accounts", force: true do |t|
+    t.string   "nickname"
+    t.string   "gateway_reference_id"
+    t.integer  "ownable_id"
+    t.string   "ownable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "organization_admins", force: true do |t|
     t.integer  "user_id"
