@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20140622215537) do
   create_table "bank_accounts", force: true do |t|
     t.string   "nickname"
     t.string   "gateway_reference_id"
+    t.string   "status"
     t.integer  "ownable_id"
     t.string   "ownable_type"
     t.datetime "created_at"

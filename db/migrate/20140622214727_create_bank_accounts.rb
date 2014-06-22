@@ -3,6 +3,7 @@ class CreateBankAccounts < ActiveRecord::Migration
     create_table :bank_accounts do |t|
       t.string :nickname
       t.string :gateway_reference_id
+      t.string :status
 
       t.integer :ownable_id
       t.string :ownable_type
