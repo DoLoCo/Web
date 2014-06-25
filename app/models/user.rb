@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :organizations, through: :organization_admins
   has_many :donations
 
+  before_validation :sanitize_email
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, 
@@ -18,6 +20,10 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, if: :check_password_requirements
 
 private
+
+  def sanitize_email
+    email.downcase! if !email.blank?
+  end
 
   def check_email_uniqueness
     new_record? || email_changed?

@@ -4,8 +4,8 @@ module Api
       before_action :authenticate, only: [:test]
 
       def create
-        user = User.find_by(email: params[:email].downcase) if !params[:email].blank?
-        if user && !params[:password].blank? && user.authenticate(params[:password])
+        user = Session.authenticate(params[:email], params[:password])
+        if user
           token = AuthToken.issue_token({ user_id: user.id })
           render json: { 
             user: UserSerializer.new(user).to_json,
