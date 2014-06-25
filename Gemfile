@@ -9,11 +9,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
-#gem 'devise'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'balanced'
 gem 'active_model_serializers'
+gem 'pundit'
+gem 'sidekiq'
 
 group :development do
   gem 'spring'
