@@ -4,7 +4,7 @@ module Api
 
     respond_to :json
 
-  private
+  protected
 
     def authenticate
       authenticate_token || render_unauthorized

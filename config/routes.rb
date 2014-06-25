@@ -6,6 +6,10 @@ Rails.application.routes.draw do
       end
       
       resource :registration, only: [:create]
+
+      resources :organizations, only: [:index, :show, :create, :update, :delete] do
+        get :mine, on: :collection
+      end
     end
   end
 
