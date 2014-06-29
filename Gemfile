@@ -15,6 +15,7 @@ gem 'balanced'
 gem 'active_model_serializers'
 gem 'pundit'
 gem 'sidekiq'
+gem 'will_paginate'
 
 group :development do
   gem 'spring'
