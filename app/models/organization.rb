@@ -11,4 +11,14 @@ class Organization < ActiveRecord::Base
   validates :city, presence: true
   validates :state, presence: true
   validates :postal_code, presence: true
+
+  def address
+    address_parts = []
+
+    address_parts << address_line1
+    address_parts << address_line2
+    address_parts << "#{city}, #{state} #{postal_code}"
+
+    address_parts.join("\n")
+  end
 end

@@ -16,6 +16,7 @@ gem 'active_model_serializers'
 gem 'pundit'
 gem 'sidekiq'
 gem 'will_paginate'
+gem 'geocoder'
 
 group :development do
   gem 'spring'
