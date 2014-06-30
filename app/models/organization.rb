@@ -16,7 +16,7 @@ class Organization < ActiveRecord::Base
     address_parts = []
 
     address_parts << address_line1
-    address_parts << address_line2
+    address_parts << address_line2 unless address_line2.blank?
     address_parts << "#{city}, #{state} #{postal_code}"
 
     address_parts.join("\n")
