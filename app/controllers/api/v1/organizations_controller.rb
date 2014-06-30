@@ -4,7 +4,7 @@ module Api
       before_action :authenticate, only: [:mine, :create, :update, :destroy]
 
       def index
-        respond_with(Organization.all) # TODO: need to filter this
+        respond_with(Organization.all) # TODO: need to filter this by location
       end
 
       def mine
@@ -16,16 +16,22 @@ module Api
       end
 
       def create
-        # TODO:
-        # validate and create organization
-        # assign current_user to be one of the admins
-        # push job to geocode the oranization's address
+        organization = Organization.new(organization_params)
+        organization.organization_admins.build(user: current_user)
+        
+        if organization.save
+          OrganizationGeocodingWorker.perform_async(organization.id)
+        end
+
+        respond_with(organization)
       end
 
       def update #TODO create policy
-        # TODO:
-        # validate and update organization
-        # push job to geocode the organization's address if any part of the address has changed
+        organization = Organization.find(params[:id])
+        if organization.update(organization_params)
+          OrganizationGeocodingWorker.perform_async(organization.id) if organization.address_changed?
+        end
+        respond_with(organization)
       end
 
       def destroy #TODO create policy

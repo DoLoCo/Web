@@ -21,4 +21,12 @@ class Organization < ActiveRecord::Base
 
     address_parts.join("\n")
   end
+
+  def address_changed?
+    address_line1_changed? ||
+    address_line2_changed? ||
+    city_changed? ||
+    state_changed? ||
+    postal_code_changed?
+  end
 end
