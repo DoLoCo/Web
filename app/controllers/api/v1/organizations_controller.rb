@@ -1,11 +1,11 @@
 module Api
   module V1
     class OrganizationsController < Api::ApplicationController
-      set_pagination_headers :organizations, only: [:index, :mine]
-
       before_action :authenticate, only: [:mine, :create, :update, :destroy]
 
       after_action :verify_authorized, only: [:update, :destroy]
+
+      set_pagination_headers :organizations, only: [:index, :mine]
 
       def index
         # TODO: filter based on search

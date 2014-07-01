@@ -10,6 +10,8 @@ Rails.application.routes.draw do
       resources :organizations, only: [:index, :show, :create, :update, :delete] do
         get :mine, on: :collection
       end
+
+      resources :campaigns, only: []
     end
   end
 
