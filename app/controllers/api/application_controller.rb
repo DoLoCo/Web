@@ -2,8 +2,8 @@ module Api
   class ApplicationController < ActionController::Base
     include Pundit
 
-    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    rescue_from Pundit::NotAuthorizedError, with: :render_user_not_authorized
+    rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
 
     protect_from_forgery with: :null_session
 
@@ -30,11 +30,11 @@ module Api
       render json: { error: 'Authorization header not valid' }, status: :unauthorized
     end
 
-    def user_not_authorized
+    def render_user_not_authorized
       render json: { error: 'User not authorized to perform action' }, status: :unauthorized
     end
 
-    def record_not_found
+    def render_record_not_found
       render json: { error: 'Record not found' }, status: :not_found
     end
     
