@@ -3,6 +3,8 @@ module Api
     class OrganizationsController < Api::ApplicationController
       before_action :authenticate, only: [:mine, :create, :update, :destroy]
 
+      after_action :verify_authorized, only: [:update, :destroy]
+
       def index
         respond_with(Organization.all) # TODO: need to filter this by location
       end
@@ -16,32 +18,36 @@ module Api
       end
 
       def create
-        organization = Organization.new(organization_params)
-        organization.organization_admins.build(user: current_user)
+        @organization = Organization.new(organization_params)
+        @organization.organization_admins.build(user: current_user)
         
-        if organization.save
-          OrganizationGeocodingWorker.perform_async(organization.id)
+        if @organization.save
+          OrganizationGeocodingWorker.perform_async(@organization.id)
         end
 
-        respond_with(organization)
+        respond_with(@organization)
       end
 
-      def update #TODO create policy
-        organization = Organization.find(params[:id])
-        if organization.update(organization_params)
-          OrganizationGeocodingWorker.perform_async(organization.id) if organization.address_changed?
+      def update
+        @organization = Organization.find(params[:id])
+        authorize(@organization, :update?)
+        if @organization.update(organization_params)
+          OrganizationGeocodingWorker.perform_async(@organization.id) if @organization.address_changed?
         end
-        respond_with(organization)
+        respond_with(@organization)
       end
 
-      def destroy #TODO create policy
-        
+      def destroy
+        @organization = Organization.find(params[:id])
+        authorize(@organization, :destroy?)
+        @organization.destroy
+        respond_with(@organization)
       end
 
     private
 
-      def organization_params # TODO move to policy object
-        params.require(:organization).permit(:name, :website, :phone_number, :description, :address_line1, :address_line2, :city, :state, :postal_code)
+      def organization_params
+        params.require(:organization).permit(*policy(@organization || Organization).permitted_attributes)
       end
 
     end
