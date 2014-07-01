@@ -17,7 +17,8 @@ module Api
         headers["X-Pagination"] = {
           total: results.total_entries,
           total_pages: results.total_pages,
-          offset: results.offset
+          offset: results.offset,
+          out_of_bounds: results.out_of_bounds?
         }.to_json
       end
     end

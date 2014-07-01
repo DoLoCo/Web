@@ -1,6 +1,8 @@
 module Api
   module V1
     class OrganizationsController < Api::ApplicationController
+      set_pagination_headers :organizations, only: [:index, :mine]
+
       before_action :authenticate, only: [:mine, :create, :update, :destroy]
 
       after_action :verify_authorized, only: [:update, :destroy]
@@ -32,6 +34,11 @@ module Api
       end
 
       def update
+        puts
+        puts 'HERE'
+        puts policy(@organization || Organization).permitted_attributes.inspect
+        puts
+
         @organization = Organization.find(params[:id])
         authorize(@organization, :update?)
         if @organization.update(organization_params)
@@ -50,6 +57,7 @@ module Api
     private
 
       def organization_params
+        # TODO: not sure if the policy thing will work...
         params.require(:organization).permit(*policy(@organization || Organization).permitted_attributes)
       end
 
