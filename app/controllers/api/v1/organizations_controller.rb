@@ -6,15 +6,18 @@ module Api
       after_action :verify_authorized, only: [:update, :destroy]
 
       def index
-        respond_with(Organization.all) # TODO: need to filter this by location
+        # TODO: filter based on search
+        @organizations = Organization.paginate(page: params[:page], per_page: 10)
+        respond_with(@organizations)
       end
 
       def mine
-        respond_with(current_user.organizations)
+        @organizations = current_user.organizations.paginate(page: params[:page], per_page: 10)
+        respond_with(@organizations)
       end
 
       def show
-        respond_with(Organization.find(params[:id]))
+        respond_with(@organization = Organization.find(params[:id]))
       end
 
       def create
