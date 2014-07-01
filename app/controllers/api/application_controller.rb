@@ -1,5 +1,8 @@
 module Api
   class ApplicationController < ActionController::Base
+    include Pundit
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
     protect_from_forgery with: :null_session
 
     respond_to :json
@@ -23,6 +26,10 @@ module Api
 
     def current_user
       @current_user ||= User.find(@token.first['user_id']) if @token
+    end
+
+    def user_not_authorized
+      render json: { error: 'User not authorized to perform action' }, status: :unauthorized
     end
     
   end
