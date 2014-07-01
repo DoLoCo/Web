@@ -1,4 +1,4 @@
-class OrganizationPolicy < ApplicationPolicy
+class OrganizationPolicy < Struct.new(:user, :organization)
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope

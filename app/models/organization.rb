@@ -4,6 +4,9 @@ class Organization < ActiveRecord::Base
   has_many :bank_accounts, as: :ownable
   has_many :campaigns
 
+  # a hack to get if the address changed when update is called and we want to know after the fact
+  before_update :address_changed?
+
   validates :name, presence: true
   validates :phone_number, presence: true
   validates :description, presence: true
@@ -23,10 +26,12 @@ class Organization < ActiveRecord::Base
   end
 
   def address_changed?
-    address_line1_changed? ||
-    address_line2_changed? ||
-    city_changed? ||
-    state_changed? ||
-    postal_code_changed?
+    return @address_changed if defined?(@address_changed)
+
+    @address_changed = address_line1_changed? ||
+                       address_line2_changed? ||
+                       city_changed? ||
+                       state_changed? ||
+                       postal_code_changed?
   end
 end

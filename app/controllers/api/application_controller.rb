@@ -23,7 +23,6 @@ module Api
       end
     end
 
-
     def current_user
       @current_user ||= User.find(@token.first['user_id']) if @token
     end

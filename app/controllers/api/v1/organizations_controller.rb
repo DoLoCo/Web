@@ -34,11 +34,6 @@ module Api
       end
 
       def update
-        puts
-        puts 'HERE'
-        puts policy(@organization || Organization).permitted_attributes.inspect
-        puts
-
         @organization = Organization.find(params[:id])
         authorize(@organization, :update?)
         if @organization.update(organization_params)
