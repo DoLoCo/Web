@@ -16,13 +16,15 @@ class Organization < ActiveRecord::Base
   validates :postal_code, presence: true
 
   def address
+    return @address if defined?(@address)
+
     address_parts = []
 
     address_parts << address_line1
     address_parts << address_line2 unless address_line2.blank?
     address_parts << "#{city}, #{state} #{postal_code}"
 
-    address_parts.join("\n")
+    @address = address_parts.join("\n").strip
   end
 
   def address_changed?
