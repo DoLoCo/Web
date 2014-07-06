@@ -20,21 +20,22 @@ module Api
       end
 
       def create
-        # authorize create
-        # build campaign from organization
-        # save and respond with json
+        @campaign = @organization.campaigns.build(campaign_params)
+        authorize(@campaign, :create?)
+        @campaign.save
+        respond_with(@campaign)
       end
 
       def update
-        # authorize update on campaign/org
-        # update campaign
-        # respond with json
+        authorize(@campaign, :update?)
+        @campaign.update(campaign_params)
+        respond_with(@campaign)
       end
 
       def destroy
-        # authorize destroy on campaign/org
-        # destroy
-        # respond with json
+        authorize(@campaign, :destroy?)
+        @campaign.destroy
+        respond_with(@campaign)
       end
 
     private
@@ -45,6 +46,10 @@ module Api
 
       def load_campaign
         @campaign = Campaign.find(params[:id])
+      end
+
+      def campaign_params
+        params.require(:campaign).permit(*policy(@campaign || Campaign).permitted_attributes)
       end
 
     end

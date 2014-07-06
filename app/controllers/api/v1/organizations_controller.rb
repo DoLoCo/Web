@@ -52,7 +52,6 @@ module Api
     private
 
       def organization_params
-        # TODO: not sure if the policy thing will work...
         params.require(:organization).permit(*policy(@organization || Organization).permitted_attributes)
       end
 
