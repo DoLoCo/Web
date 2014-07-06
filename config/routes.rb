@@ -9,9 +9,11 @@ Rails.application.routes.draw do
 
       resources :organizations, only: [:index, :show, :create, :update, :delete] do
         get :mine, on: :collection
+
+        resources :campaigns, only: [:create, :update, :destroy]
       end
 
-      resources :campaigns, only: []
+      resources :campaigns, only: [:index, :show]
     end
   end
 
