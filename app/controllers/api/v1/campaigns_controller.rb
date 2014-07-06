@@ -10,7 +10,7 @@ module Api
 
       def index
         # TODO: filter based on search
-        # TODO: optional by organization (if params[:organization_id] is present)
+        # TODO: optional by organization (if params[:organization_id] is present), for now omit
         @campaigns = Campaign.paginate(page: params[:page], per_page: 10)
         respond_with(@campaigns)
       end

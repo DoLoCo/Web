@@ -27,6 +27,10 @@ class Organization < ActiveRecord::Base
     @address = address_parts.join("\n").strip
   end
 
+  def is_admin?(user_id)
+    admins.where(users: { id: user.id }).exists?
+  end
+
   def address_changed?
     return @address_changed if defined?(@address_changed)
 

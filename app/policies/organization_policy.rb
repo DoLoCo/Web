@@ -10,17 +10,11 @@ class OrganizationPolicy < Struct.new(:user, :organization)
   end
 
   def update?
-    is_organization_admin?
+    organization.is_admin?(user.id)
   end
 
   def destroy?
-    is_organization_admin?
-  end
-
-private
-
-  def is_organization_admin?
-    organization.admins.where(users: { id: user.id }).exists?
+    organization.is_admin?(user.id)
   end
 
 end
