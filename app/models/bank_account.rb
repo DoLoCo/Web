@@ -1,8 +1,20 @@
 class BankAccount < ActiveRecord::Base
+  # Statuses
+  #------------
+  # unverified: Verification has not been sent via gateway
+  # verification_created: Verification has been sent via gateway, waiting response
+  # verification_failed: Verification failed
+  # verified: Successfully verified and ready to use
+  # inactive: User has removed this account (removed from gateway, keep meta record for book keeping)
   STATUSES = {
-    :active => 'Active',
-    :not_active => 'Not Active' # user removed this, still need it for book keeping
+    unverified: 'Unverified',
+    verification_created: 'Verification Created',
+    verification_failed: 'Verification Failed',
+    verified: 'Verified',
+    inactive: 'Inactive'
   }
+
+  attr_accessor :account_number, :account_type, :bank_name, :routing_number
 
   belongs_to :ownable, polymorphic: true
 
@@ -16,6 +28,6 @@ class BankAccount < ActiveRecord::Base
 private
 
   def set_default_status
-    self.status = STATUSES[:active]
+    self.status = STATUSES[:unverified]
   end
 end
