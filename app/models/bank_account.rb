@@ -14,16 +14,20 @@ class BankAccount < ActiveRecord::Base
     inactive: 'Inactive'
   }
 
-  attr_accessor :account_number, :account_type, :bank_name, :routing_number
+  attr_accessor :account_number, :account_type, :routing_number
 
   belongs_to :ownable, polymorphic: true
 
   has_many :campaigns
   has_many :donations
 
-  validates :nickname, presence: true
+  validates :bank_account_name, presence: true
+  validates :last_four, presence: true
 
   before_create :set_default_status
+
+  # TODO
+  # before_save :set_last_four :if => account_number
 
 private
 

@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624011540) do
+ActiveRecord::Schema.define(version: 20140708234637) do
 
   create_table "bank_accounts", force: true do |t|
-    t.string   "nickname"
+    t.string   "bank_account_name"
     t.string   "gateway_reference_id"
     t.string   "status"
     t.integer  "ownable_id"
     t.string   "ownable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "last_four",            limit: 4
   end
 
   create_table "campaigns", force: true do |t|
