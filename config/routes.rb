@@ -7,12 +7,12 @@ Rails.application.routes.draw do
       
       resource :registration, only: [:create]
 
-      resources :bank_accounts, only: [:index, :show, :create, :update, :destroy], module: :user
+      resources :bank_accounts, only: [:index, :show, :create, :destroy], module: :user
 
       resources :organizations, only: [:index, :show, :create, :update, :destroy] do
         get :mine, on: :collection
 
-        resources :bank_accounts, only: [:index, :show, :create, :update, :destroy]
+        resources :bank_accounts, only: [:index, :show, :create, :destroy]
         resources :campaigns, only: [:create, :update, :destroy]
       end
 

@@ -1,4 +1,9 @@
 class BankAccount < ActiveRecord::Base
+  OWNABLE_TYPES = {
+    user: 'User',
+    organization: 'Organization'
+  }
+
   # Statuses
   #------------
   # unverified: Verification has not been sent via gateway
@@ -23,11 +28,16 @@ class BankAccount < ActiveRecord::Base
 
   validates :bank_account_name, presence: true
   validates :last_four, presence: true
+  validates :gateway_reference_id, presence: true, on: :create
 
   before_create :set_default_status
 
   # TODO
   # before_save :set_last_four :if => account_number
+
+  def destroy
+    update_attribute(:status, STATUSES[:inactive])
+  end
 
 private
 

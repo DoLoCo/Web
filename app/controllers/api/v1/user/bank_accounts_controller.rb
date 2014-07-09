@@ -3,6 +3,7 @@ module Api
     module User
       class BankAccountsController < Api::ApplicationController
         before_action :authenticate
+        before_action :load_bank_account, only: [:update, :destroy]
 
         set_pagination_headers :bank_accounts, only: [:index]
 
@@ -15,16 +16,34 @@ module Api
           respond_with(current_user.bank_accounts.find(params[:id]))
         end
 
-        def create
-          @bank_account = current_user.bank_accounts.build
-        end
+        def create # Move TODO into service object
+          @bank_account = current_user.bank_accounts.build(bank_account_params)
+          # TODO:
+          # store last four account_number (do in before_save?)
+          # create balancepayment bank_account
+          # store gateway_reference_id from balancedpayment response
+          if @bank_account.save
+            # push job for bank account verification
+          end
 
-        def update
-          
+          respond_with(@bank_account)
         end
 
         def destroy
-          
+          authorize(@bank_account, :destroy?)
+          # remove from balancedpayments
+          @bank_account.destroy # if the response came back successfully
+          respond_with(@bank_account)
+        end
+
+      private
+
+        def bank_account_params
+          params.require(:bank_account).permit(*policy(@bank_account || BankAccount).permitted_attributes)
+        end
+
+        def load_bank_account
+          @bank_account = BankAccount.find(params[:id])
         end
 
       end
