@@ -17,4 +17,8 @@ class OrganizationPolicy < Struct.new(:user, :organization)
     organization.is_admin?(user.id)
   end
 
+  def show?
+    organization.is_admin?(user.id)
+  end
+
 end

@@ -3,7 +3,7 @@ module Api
     module User
       class BankAccountsController < Api::ApplicationController
         before_action :authenticate
-        before_action :load_bank_account, only: [:update, :destroy]
+        before_action :load_bank_account, only: [:show, :destroy]
 
         set_pagination_headers :bank_accounts, only: [:index]
 
@@ -13,10 +13,10 @@ module Api
         end
 
         def show
-          respond_with(current_user.bank_accounts.find(params[:id]))
+          respond_with(@bank_account)
         end
 
-        def create # Move TODO into service object
+        def create # TODO move into service object
           @bank_account = current_user.bank_accounts.build(bank_account_params)
           
           # TODO:
@@ -30,7 +30,7 @@ module Api
           respond_with(@bank_account)
         end
 
-        def destroy
+        def destroy # TODO: move logic into service object
           authorize(@bank_account, :destroy?)
           # remove from balancedpayments
           @bank_account.destroy # if the response came back successfully
@@ -39,12 +39,12 @@ module Api
 
       private
 
-        def bank_account_params
+        def bank_account_params # Move into service object
           params.require(:bank_account).permit(*policy(@bank_account || BankAccount).permitted_attributes)
         end
 
         def load_bank_account
-          @bank_account = BankAccount.find(params[:id])
+          @bank_account ||= current_user.bank_accounts.find(params[:id])
         end
 
       end
