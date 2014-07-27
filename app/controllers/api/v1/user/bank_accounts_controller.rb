@@ -18,6 +18,7 @@ module Api
 
         def create # Move TODO into service object
           @bank_account = current_user.bank_accounts.build(bank_account_params)
+          
           # TODO:
           # store last four account_number (do in before_save?)
           # create balancepayment bank_account
