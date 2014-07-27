@@ -5,4 +5,5 @@ class Donation < ActiveRecord::Base
   belongs_to :campaign
 
   validates :amount, numericality: { only_integer: true, greater_than: 0 }
+  validates :bank_account_id, presence: true
 end

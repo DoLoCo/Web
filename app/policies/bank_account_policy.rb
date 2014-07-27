@@ -1,4 +1,4 @@
-class BankAccountPolicy < < Struct.new(:user, :bank_account)
+class BankAccountPolicy < Struct.new(:user, :bank_account)
   def permitted_attributes
     [:bank_account_name, :account_number, :account_type, :routing_number]
   end

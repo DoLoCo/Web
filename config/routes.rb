@@ -8,12 +8,16 @@ Rails.application.routes.draw do
       resource :registration, only: [:create]
 
       resources :bank_accounts, only: [:index, :show, :create, :destroy], module: :user
+      # TODO:
+      # resources :donations, only: [:index] # User's donations
 
       resources :organizations, only: [:index, :show, :create, :update, :destroy] do
         get :mine, on: :collection
 
         resources :bank_accounts, only: [:index, :show, :create, :destroy]
-        resources :campaigns, only: [:create, :update, :destroy]
+        resources :campaigns, only: [:create, :update, :destroy] do
+          resources :donations, only: [:index, :create]
+        end
       end
 
       resources :campaigns, only: [:index, :show]
