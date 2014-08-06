@@ -17,6 +17,7 @@ gem 'pundit'
 gem 'sidekiq'
 gem 'will_paginate'
 gem 'geocoder'
+gem 'whenever', require: false
 
 group :development do
   gem 'spring'
