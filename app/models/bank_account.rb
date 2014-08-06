@@ -32,9 +32,6 @@ class BankAccount < ActiveRecord::Base
 
   before_create :set_default_status
 
-  # TODO
-  # before_save :set_last_four :if => account_number
-
   def destroy
     update_attribute(:status, STATUSES[:inactive])
   end

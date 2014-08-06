@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
                        if: :check_password_requirements
   validates :password_confirmation, presence: true, if: :check_password_requirements
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
 private
 
   def sanitize_email

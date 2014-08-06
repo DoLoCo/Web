@@ -14,9 +14,15 @@ class BankAccountCreate
       @bank_account.last_four = @bank_account.account_number.split(//).last(4).join
     end
 
-    # create balancepayment bank_account
-    # store gateway_reference_id from balancedpayment response
-    @bank_account.gateway_reference_id = '91919-TEST'
+    gateway_bank_account = Balanced::BankAccount.new(
+      account_number: @bank_account.account_number,
+      account_type: @bank_account.account_type,
+      routing_number: @bank_account.routing_number,
+      name: @ownable.name
+    ).save
+
+    # TODO: handle errors, didn't show up in the documentation need to dig around
+    @bank_account.gateway_reference_id = gateway_bank_account['bank_accounts'][0]['id']
 
     if @bank_account.save
       # push job for bank account verification
