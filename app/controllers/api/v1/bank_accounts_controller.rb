@@ -16,16 +16,9 @@ module Api
         respond_with(@organization.bank_accounts.find(params[:id]))
       end
 
-      def create # TODO: remove duplication between user/org bank account creation (move to service object)
-        @bank_account = @organization.bank_accounts.build(bank_account_params)
-          
-        # TODO:
-        # store last four account_number (do in before_save?)
-        # create balancepayment bank_account
-        # store gateway_reference_id from balancedpayment response
-        if @bank_account.save
-          # push job for bank account verification
-        end
+      def create
+        bank_account_service = BankAccountCreate.new(bank_account_params, @organization)
+        @bank_account = bank_account_service.save!
 
         respond_with(@bank_account)
       end
@@ -39,7 +32,7 @@ module Api
 
     private
 
-      def bank_account_params # Move into service object
+      def bank_account_params
         params.require(:bank_account).permit(*policy(@bank_account || BankAccount).permitted_attributes)
       end
 

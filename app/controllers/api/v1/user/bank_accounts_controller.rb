@@ -16,17 +16,10 @@ module Api
           respond_with(@bank_account)
         end
 
-        def create # TODO move into service object
-          @bank_account = current_user.bank_accounts.build(bank_account_params)
+        def create
+          bank_account_create = BankAccountCreate.new(bank_account_params, current_user)
+          @bank_account = bank_account_create.save!
           
-          # TODO:
-          # store last four account_number (do in before_save?)
-          # create balancepayment bank_account
-          # store gateway_reference_id from balancedpayment response
-          if @bank_account.save
-            # push job for bank account verification
-          end
-
           respond_with(@bank_account)
         end
 
@@ -39,7 +32,7 @@ module Api
 
       private
 
-        def bank_account_params # Move into service object
+        def bank_account_params
           params.require(:bank_account).permit(*policy(@bank_account || BankAccount).permitted_attributes)
         end
 
