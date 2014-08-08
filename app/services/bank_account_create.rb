@@ -25,7 +25,7 @@ class BankAccountCreate
     @bank_account.gateway_reference_id = gateway_bank_account['bank_accounts'][0]['id']
 
     if @bank_account.save
-      # push job for bank account verification
+      BankAccountVerificationWorker.perform_async(@bank_account.id)
     end
 
     @bank_account

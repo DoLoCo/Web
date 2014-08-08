@@ -36,6 +36,14 @@ class BankAccount < ActiveRecord::Base
     where(status: STATUSES[:verified])
   end
 
+  def unverified?
+    status == STATUSES[:unverified]
+  end
+
+  def verification_created!
+    update_attribute(:status, STATUSES[:verification_created])
+  end
+
   def destroy
     update_attribute(:status, STATUSES[:inactive])
   end
