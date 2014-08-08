@@ -32,6 +32,10 @@ class BankAccount < ActiveRecord::Base
 
   before_create :set_default_status
 
+  def self.verified
+    where(status: STATUSES[:verified])
+  end
+
   def destroy
     update_attribute(:status, STATUSES[:inactive])
   end

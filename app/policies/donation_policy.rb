@@ -4,6 +4,6 @@ class DonationPolicy < Struct.new(:user, :donation)
   end
 
   def create?
-    user.bank_accounts.where(id: donation.bank_account_id).exists?
+    user.bank_accounts.verified.where(id: donation.bank_account_id).exists?
   end
 end
