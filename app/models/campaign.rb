@@ -15,7 +15,13 @@ class Campaign < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
 
- before_create :set_default_status
+  before_create :set_default_status
+
+  def self.by_distance_from_coordinates(lat, lng, distance=5, units='mi')
+    distance = distance / 0.62137 if units == 'mi'
+    includes(:organization).references(:organization)
+      .where('calculate_distance(organizations.lat, organizations.lng, ?, ?) <= ?', lat, lng, distance)
+  end
 
 private
 
