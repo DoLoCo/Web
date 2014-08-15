@@ -25,8 +25,15 @@ module Api
 
         def destroy # TODO: move logic into service object
           authorize(@bank_account, :destroy?)
-          # remove from balancedpayments
-          @bank_account.destroy # if the response came back successfully
+          
+          begin
+            gateway_bank_account = Balanced::BankAccount.fetch("/bank_accounts/#{@bank_account.gateway_reference_id}")
+            gateway_bank_account.unstore
+            @bank_account.destroy
+          rescue Balanced::Error => e
+            # TODO: log error and/or return the appropriate status code
+          end
+          
           respond_with(@bank_account)
         end
 
