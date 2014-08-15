@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814232259) do
+ActiveRecord::Schema.define(version: 20140814234955) do
 
   create_table "bank_accounts", force: true do |t|
     t.string   "bank_account_name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140814232259) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "last_four",            limit: 4
+    t.string   "verification_link"
   end
 
   create_table "campaigns", force: true do |t|

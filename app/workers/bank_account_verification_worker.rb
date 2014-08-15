@@ -7,9 +7,9 @@ class BankAccountVerificationWorker
     if bank_account.unverified?
       begin
         gateway_ba = Balanced::BankAccount.fetch("/bank_accounts/#{bank_account.gateway_reference_id}") 
-        gateway_ba.verify
+        verification = gateway_ba.verify
 
-        bank_account.verification_created!
+        bank_account.verification_created!(verification.attributes['href'])
       rescue Balanced::Error => e
         self.perform_async(bank_account_id)
       end

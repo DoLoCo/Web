@@ -40,8 +40,8 @@ class BankAccount < ActiveRecord::Base
     status == STATUSES[:unverified]
   end
 
-  def verification_created!
-    update_attribute(:status, STATUSES[:verification_created])
+  def verification_created!(link)
+    update(verification_link: link, status: STATUSES[:verification_created])
   end
 
   def destroy
