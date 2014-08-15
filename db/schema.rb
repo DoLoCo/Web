@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140814234955) do
+ActiveRecord::Schema.define(version: 20140815215342) do
 
   create_table "bank_accounts", force: true do |t|
     t.string   "bank_account_name"
