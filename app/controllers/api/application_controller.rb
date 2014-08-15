@@ -5,8 +5,6 @@ module Api
     rescue_from Pundit::NotAuthorizedError, with: :render_user_not_authorized
     rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found
 
-    protect_from_forgery with: :null_session
-
     respond_to :json
 
   protected
