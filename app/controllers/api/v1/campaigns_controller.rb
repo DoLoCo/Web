@@ -9,9 +9,16 @@ module Api
       set_pagination_headers :campaigns, only: [:index]
 
       def index
-        # TODO: filter based on search
-        # TODO: optional by organization (if params[:organization_id] is present), for now omit
         @campaigns = Campaign.paginate(page: params[:page], per_page: 10)
+
+        if !params[:latitude].blank? && !params[:longitude].blank?
+          @campaigns = @campaigns.by_distance_from_coordinates(params[:latitude], params[:longitude])
+        end
+
+        if !params[:organization_id]
+          @campaigns = @campaigns.by_organization_id(params[:organization_id])
+        end
+
         respond_with(@campaigns)
       end
 

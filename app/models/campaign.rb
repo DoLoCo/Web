@@ -23,6 +23,10 @@ class Campaign < ActiveRecord::Base
       .where('calculate_distance(organizations.lat, organizations.lng, ?, ?) <= ?', lat, lng, distance)
   end
 
+  def self.by_organization_id(organization_id)
+    where(organization_id: organization_id)
+  end
+
 private
 
   def set_default_status
