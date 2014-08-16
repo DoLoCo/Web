@@ -23,6 +23,9 @@ group :development do
   gem 'spring'
   gem 'bullet'
   gem 'brakeman'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
 end
 
 group :test, :development do
