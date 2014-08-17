@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
+      get 'heartbeat', to: 'heartbeat#index'
+
       resource :session, only: [:create] do
         get :test, on: :member
       end
