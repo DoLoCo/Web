@@ -17,7 +17,7 @@ set :deploy_to, '/home/deploy/www/doloco'
 set :format, :pretty
 set :pty, false # b/c sidekiq bug?
 
-set :linked_files, %w{config/database.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 set :keep_releases, 5
