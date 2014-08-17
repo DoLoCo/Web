@@ -8,11 +8,11 @@ set :ssh_options, {
 set :scm, :git
 
 set :application, 'DoLoCo'
-set :repo_url, 'git@example.com:DoLoCo/Web.git'
+set :repo_url, 'git@github.com:DoLoCo/Web.git'
 
 set :stages, ['production']
 
-set :deploy_to, '/home/deploy/www'
+set :deploy_to, '/home/deploy/www/doloco'
 
 
 set :format, :pretty
