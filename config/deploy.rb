@@ -6,14 +6,13 @@ set :ssh_options, {
 }
 
 set :scm, :git
-
+set :deploy_via, :remote_cache
 set :application, 'DoLoCo'
 set :repo_url, 'git@github.com:DoLoCo/Web.git'
 
 set :stages, ['production']
 
 set :deploy_to, '/home/deploy/www/doloco'
-
 
 set :format, :pretty
 set :pty, false # b/c sidekiq bug?
