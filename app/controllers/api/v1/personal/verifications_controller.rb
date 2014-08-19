@@ -1,6 +1,6 @@
 module Api
   module V1
-    module User
+    module Personal
       class VerificationsController < Api::ApplicationController
         before_action :load_bank_account
 

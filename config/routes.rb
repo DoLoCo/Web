@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       
       resource :registration, only: [:create]
 
-      resources :bank_accounts, only: [:index, :show, :create, :destroy], module: :user do
+      resources :bank_accounts, only: [:index, :show, :create, :destroy], module: :personal do
         resources :verifications, only: [:create]
       end
       # TODO:
