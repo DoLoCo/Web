@@ -6,7 +6,7 @@ module Api
       set_pagination_headers :donations, only: [:index]
 
       def index
-        @donations = @campaign.donations.paginate(page: params[:page], per_page: 50)
+        @donations = @campaign.donations.ordered.paginate(page: params[:page], per_page: 50)
         respond_with(@donations)
       end
 
