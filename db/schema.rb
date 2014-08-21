@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815215342) do
+ActiveRecord::Schema.define(version: 20140821234654) do
 
   create_table "bank_accounts", force: true do |t|
     t.string   "bank_account_name"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20140815215342) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
+    t.integer  "actual_amount"
   end
 
   add_index "donations", ["bank_account_id"], name: "index_donations_on_bank_account_id", using: :btree

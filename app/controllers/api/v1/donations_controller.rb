@@ -17,7 +17,7 @@ module Api
         authorize(@donation, :create?)
 
         if @donation.save
-          # process donation with worker
+          InitiateDonationProcessWorker.perform_async(@donation.id)
         end
         
         respond_with(@donation)
