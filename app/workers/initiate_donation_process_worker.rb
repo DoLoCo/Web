@@ -20,8 +20,7 @@ class InitiateDonationProcessWorker
       )
 
       # calculate actual donation amount after fees
-      # Fee is 1% + $0.30 processing debits
-      # and $0.25 for processing credits
+      # Fee is 1% + $0.30 processing debits and $0.25 for processing credits
       donation.actual_amount = (donation.amount - (donation.amount * 0.01)) - 55
       donation.status = Donation::STATUSES[:pending]
       donation.save
