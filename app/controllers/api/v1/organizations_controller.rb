@@ -1,7 +1,7 @@
 module Api
   module V1
     class OrganizationsController < Api::ApplicationController
-      before_action :authenticate, only: [:mine, :create, :update, :destroy]
+      skip_before_action :authenticate, only: [:index, :show]
 
       after_action :verify_authorized, only: [:update, :destroy]
 

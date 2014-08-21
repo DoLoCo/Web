@@ -1,7 +1,7 @@
 module Api
   module V1
     class CampaignsController < Api::ApplicationController
-      before_action :authenticate, only: [:create, :update, :destroy]
+      skip_before_action :authenticate, only: [:index, :show]
 
       before_action :load_organization, only: [:create, :update, :destroy]
       before_action :load_campaign, only: [:show, :update, :destroy]

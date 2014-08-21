@@ -6,4 +6,8 @@ class Donation < ActiveRecord::Base
 
   validates :amount, numericality: { only_integer: true, greater_than: 0 }
   validates :bank_account_id, presence: true
+
+  def self.ordered
+    order('donations.created_at DESC')
+  end
 end

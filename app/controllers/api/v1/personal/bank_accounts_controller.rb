@@ -2,7 +2,6 @@ module Api
   module V1
     module Personal
       class BankAccountsController < Api::ApplicationController
-        before_action :authenticate
         before_action :load_bank_account, only: [:show, :destroy]
 
         set_pagination_headers :bank_accounts, only: [:index]

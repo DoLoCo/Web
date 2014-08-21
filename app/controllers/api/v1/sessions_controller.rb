@@ -1,7 +1,7 @@
 module Api
   module V1
     class SessionsController < Api::ApplicationController
-      before_action :authenticate, only: [:test]
+      skip_before_action :authenticate, only: [:create]
 
       def create
         user = Session.authenticate(params[:email], params[:password])

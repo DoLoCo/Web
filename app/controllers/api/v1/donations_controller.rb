@@ -1,7 +1,6 @@
 module Api
   module V1
     class DonationsController < Api::ApplicationController
-      before_action :authenticate
       before_action :load_campaign
 
       set_pagination_headers :donations, only: [:index]

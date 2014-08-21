@@ -1,7 +1,6 @@
 module Api
   module V1
     class BankAccountsController < Api::ApplicationController
-      before_action :authenticate
       before_action :load_organization
       before_action :authorize_organization_admin
 

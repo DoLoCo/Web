@@ -12,8 +12,8 @@ Rails.application.routes.draw do
       resources :bank_accounts, only: [:index, :show, :create, :destroy], module: :personal do
         resources :verifications, only: [:create]
       end
-      # TODO:
-      # resources :donations, only: [:index] # User's donations
+      
+      resources :donations, only: [:index], module: :personal
 
       resources :organizations, only: [:index, :show, :create, :update, :destroy] do
         get :mine, on: :collection

@@ -7,6 +7,8 @@ module Api
 
     respond_to :json
 
+    before_action :authenticate
+
   protected
 
     def self.set_pagination_headers(name, options={})
