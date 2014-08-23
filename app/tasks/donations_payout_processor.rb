@@ -1,6 +1,6 @@
 class DonationsPayoutProcessor
 
-  def process
+  def self.run
     
   end
 
