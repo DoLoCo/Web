@@ -26,6 +26,7 @@ class InitiateDonationProcessWorker
       donation.save
     rescue Balanced::Error => e
       # TODO log error
+      # TODO, probably need a scheduled task to re-run all failed ones
     end
   end
 
