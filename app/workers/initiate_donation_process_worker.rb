@@ -15,7 +15,7 @@ class InitiateDonationProcessWorker
 
       gateway_bank_account.debit(
         amount: donation.amount,
-        appears_on_statement_as: "DoLoCoDonation",
+        appears_on_statement_as: 'DoLoCoDonation',
         description: "Donation to #{campaign.organization.name} - #{campaign.title}"
       )
 

@@ -27,6 +27,10 @@ class Campaign < ActiveRecord::Base
     where(organization_id: organization_id)
   end
 
+  def self.with_pending_donations
+    joins(:donations).where('donations.status = ?', Donation::STATUSES[:pending])
+  end
+
 private
 
   def set_default_status

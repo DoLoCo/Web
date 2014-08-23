@@ -20,6 +20,10 @@ class Donation < ActiveRecord::Base
     order('donations.created_at DESC')
   end
 
+  def self.pending
+    where(status: STATUSES[:pending])    
+  end
+
 private
 
   def set_default_status
