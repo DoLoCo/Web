@@ -19,7 +19,7 @@ module Api
         bank_account_service = BankAccountCreate.new(bank_account_params, @organization)
         @bank_account = bank_account_service.save!
 
-        respond_with(@bank_account)
+        respond_with(@bank_account, location: api_v1_organization_bank_accounts_url)
       end
 
       def destroy # TODO: move logic into service object
