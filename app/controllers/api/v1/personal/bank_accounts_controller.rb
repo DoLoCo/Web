@@ -2,6 +2,8 @@ module Api
   module V1
     module Personal
       class BankAccountsController < Api::ApplicationController
+        respond_to :json
+
         before_action :load_bank_account, only: [:show, :destroy]
 
         set_pagination_headers :bank_accounts, only: [:index]
@@ -19,7 +21,7 @@ module Api
           bank_account_create = BankAccountCreate.new(bank_account_params, current_user)
           @bank_account = bank_account_create.save!
           
-          respond_with(@bank_account)
+          respond_with(@bank_account, location: api_v1_bank_accounts_url)
         end
 
         def destroy # TODO: move logic into service object
@@ -33,7 +35,7 @@ module Api
             # TODO: log error and/or return the appropriate status code
           end
           
-          respond_with(@bank_account)
+          respond_with(@bank_account, location: api_v1_bank_accounts_url)
         end
 
       private
