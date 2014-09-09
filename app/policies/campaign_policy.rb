@@ -5,7 +5,7 @@ class CampaignPolicy
   def initialize(user, campaign)
     @user = user
     @campaign = campaign
-    @organization = @campaign.organization
+    @organization = @campaign.organization if @campaign.respond_to?(:organization)
   end
 
   def permitted_attributes
