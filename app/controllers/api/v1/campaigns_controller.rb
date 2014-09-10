@@ -30,19 +30,19 @@ module Api
         @campaign = @organization.campaigns.build(campaign_params)
         authorize(@organization, :update?)
         @campaign.save
-        respond_with(@campaign)
+        respond_with(@campaign, location: api_v1_organizations_url)
       end
 
       def update
         authorize(@organization, :update?)
         @campaign.update(campaign_params)
-        respond_with(@campaign)
+        respond_with(@campaign, location: api_v1_organizations_url)
       end
 
       def destroy
         authorize(@organization, :update?)
         @campaign.destroy
-        respond_with(@campaign)
+        respond_with(@campaign, location: api_v1_organizations_url)
       end
 
     private

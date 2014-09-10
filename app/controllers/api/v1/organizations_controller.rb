@@ -30,7 +30,7 @@ module Api
           OrganizationGeocodingWorker.perform_async(@organization.id)
         end
 
-        respond_with(@organization)
+        respond_with(@organization, location: api_v1_organizations_url)
       end
 
       def update
