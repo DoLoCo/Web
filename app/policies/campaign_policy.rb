@@ -1,11 +1,8 @@
 class CampaignPolicy
 
-  attr_reader :organization
-
   def initialize(user, campaign)
     @user = user
     @campaign = campaign
-    @organization = @campaign.organization if @campaign.respond_to?(:organization)
   end
 
   def permitted_attributes
@@ -22,6 +19,12 @@ class CampaignPolicy
 
   def destroy?
     organization.is_admin?(user.id)
+  end
+
+private
+
+  def organization
+    @organization ||= campaign.organization
   end
 
 end
