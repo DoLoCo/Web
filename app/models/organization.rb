@@ -28,7 +28,7 @@ class Organization < ActiveRecord::Base
   end
 
   def is_admin?(user_id)
-    admins.where(users: { id: user.id }).exists?
+    admins.where(users: { id: user_id }).exists?
   end
 
   def address_changed?
