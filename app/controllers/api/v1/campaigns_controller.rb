@@ -28,7 +28,7 @@ module Api
 
       def create
         @campaign = @organization.campaigns.build(campaign_params)
-        authorize(@organization, :create?)
+        authorize(@organization, :update?)
         @campaign.save
         respond_with(@campaign)
       end
@@ -40,7 +40,7 @@ module Api
       end
 
       def destroy
-        authorize(@organization, :destroy?)
+        authorize(@organization, :update?)
         @campaign.destroy
         respond_with(@campaign)
       end
