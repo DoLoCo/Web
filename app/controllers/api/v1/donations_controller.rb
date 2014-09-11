@@ -20,7 +20,7 @@ module Api
           InitiateDonationProcessWorker.perform_async(@donation.id)
         end
         
-        respond_with(@donation)
+        respond_with(@donation, location: api_v1_organizations_url)
       end
 
     private
