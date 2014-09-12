@@ -18,7 +18,7 @@ class Campaign < ActiveRecord::Base
   before_create :set_default_status
 
   def donations_amount_sum
-	donations.sum(:actual_amount)
+    donations.sum(:actual_amount)
   end
 
   def self.by_distance_from_coordinates(lat, lng, distance=5, units='mi')
