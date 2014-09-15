@@ -1,5 +1,5 @@
 class CampaignSerializer < ActiveModel::Serializer
-  attributes :id, :organization_id, :bank_account_id, :title, :description, :status, :target_amount, :target_date, :donations_amount_sum
+  attributes :id, :organization_id, :bank_account_id, :title, :description, :status, :target_amount, :target_date, :donations_amount_sum, :created_at
 
   has_one :organization
 
