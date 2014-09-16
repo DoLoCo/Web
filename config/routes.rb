@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resource :bank_account, only: [:new]
 
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
