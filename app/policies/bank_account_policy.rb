@@ -1,7 +1,7 @@
 class BankAccountPolicy < Struct.new(:user, :bank_account)
   def permitted_attributes
     #[:bank_account_name, :account_number, :account_type, :routing_number]
-    [:bank_account_name, :last_four, :gateway_reference_id]
+    [:bank_account_name, :last_four, :instrument_href]
   end
 
   def update?
