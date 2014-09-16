@@ -36,8 +36,10 @@ module Api
       def update
         @organization = Organization.find(params[:id])
         authorize(@organization, :update?)
-        if @organization.update(organization_params)
-          OrganizationGeocodingWorker.perform_async(@organization.id) if @organization.address_changed?
+        @organization.assign_attributes(organization_params)
+        address_changed = @organization.address_changed?
+        if @organization.save && address_changed
+          OrganizationGeocodingWorker.perform_async(@organization.id)
         end
         respond_with(@organization)
       end
