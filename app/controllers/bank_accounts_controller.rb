@@ -8,7 +8,9 @@ class BankAccountsController < ApplicationController
   def create
     @bank_account = BankAccount.new(bank_account_params)
     @bank_account.ownable = current_user
-    @bank_account.save
+    if @bank_account.save
+      BankAccountVerificationWorker.perform_async(@bank_account.id)
+    end
     respond_with(@bank_account)
   end
 

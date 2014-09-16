@@ -18,6 +18,7 @@ gem 'sidekiq', '~> 3.2.2'
 gem 'will_paginate', '~> 3.0.7'
 gem 'geocoder', '~> 1.2.4'
 gem 'whenever', require: false
+gem 'simple_form'
 
 group :development do
   gem 'spring', '~> 1.1.3'
