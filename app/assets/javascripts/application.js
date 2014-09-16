@@ -15,5 +15,5 @@
 //= require_tree .
 
 $(function() {
-
+  balanced.init();
 });
