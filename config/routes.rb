@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :bank_accounts, only: [:new, :create]
+
+  resources :organizations, only: [] do
+    resources :bank_accounts, only: [:new, :create], module: :organization
+  end
+
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       get 'heartbeat', to: 'heartbeat#index'
