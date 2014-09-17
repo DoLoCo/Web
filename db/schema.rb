@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821234654) do
+ActiveRecord::Schema.define(version: 20140917015139) do
 
   create_table "bank_accounts", force: true do |t|
     t.string   "bank_account_name"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20140821234654) do
     t.string   "ownable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "last_four",            limit: 4
+    t.string   "last_four",            limit: 50
     t.string   "verification_link"
   end
 
