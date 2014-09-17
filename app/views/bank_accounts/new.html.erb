@@ -1,11 +1,11 @@
 <form id="balanced-form">
   <div>
     <label>Account holder's name:</label>
-    <input type="text" id="ba-name" autocomplete="off" />
+    <input type="text" id="ba-name" autocomplete="off" required />
   </div>
   <div>
     <label>Routing number:</label>
-    <input type="text" id="ba-routing" autocomplete="off" />
+    <input type="text" id="ba-routing" autocomplete="off" required />
   </div>
   <div>
     <label>Account number:</label>
@@ -13,13 +13,12 @@
   </div>
   <div>
     <label>Account type:</label>
-    <select id="ba-type">
-      <option value=""></option>
+    <select id="ba-type" required>
       <option value="savings">Savings</option>
       <option value="checking">Checking</option>
     </select>
   </div>
   <div>
-    <a href="#" id="ba-create">Create</a>
+ 	<a href="#" id="ba-create" class="button expanded">Add Bank Account</a>
   </div>
 </form>

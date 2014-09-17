@@ -30,10 +30,13 @@ function getUrlParameter(sParam)
 function handleBalancedResponse(response) {
   if (response.status_code === 201) {
     var fundingInstrument = response.cards != null ? response.cards[0] : response.bank_accounts[0];
+    var organization = getUrlParameter('organization_id');
+    var orgApiUrl = '/api/v1/organizations/'+organization+'/bank_accounts';
+    var bankApiUrl = organization ? orgApiUrl:'/api/v1/bank_accounts';
 
     $.ajax({
       type: 'POST',
-      url: '/api/v1/bank_accounts',
+      url: bankApiUrl,
       data: {
 	bank_account: {
 		instrument_href: fundingInstrument.href
@@ -42,6 +45,9 @@ function handleBalancedResponse(response) {
       beforeSend: function (request) {
          var token = getUrlParameter('token');
          request.setRequestHeader('Authorization', 'Token token="'+ token +'"');
+      },
+      success: function (data) {
+        window.alert('Added Bank Account');
       }
     });
     
