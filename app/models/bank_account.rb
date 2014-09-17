@@ -19,7 +19,7 @@ class BankAccount < ActiveRecord::Base
     inactive: 'Inactive'
   }
 
-  attr_accessor :account_number, :account_type, :routing_number
+  attr_accessor :instrument_href
 
   belongs_to :ownable, polymorphic: true
 

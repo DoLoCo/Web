@@ -11,16 +11,8 @@ class BankAccountCreate
     @bank_account = ownable.bank_accounts.build(params)
 
     begin
-      #gateway_bank_account = Balanced::BankAccount.new(
-      #  account_number: @bank_account.account_number,
-      #  account_type: @bank_account.account_type,
-      #  routing_number: @bank_account.routing_number,
-      #  name: @ownable.name
-      #).save
+      gateway_bank_account = Balanced::BankAccount.fetch(@bank_account.instrument_href)
 
-      # Claim the bank account via balanced (w/e that means)
-
-      # do we get this when we "claim" the account or beforehand?
       @bank_account.gateway_reference_id = gateway_bank_account.id
 
       if @bank_account.save
