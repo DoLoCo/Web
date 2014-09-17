@@ -13,7 +13,7 @@ class BankAccountCreate
     begin
       gateway_bank_account = Balanced::BankAccount.fetch(@bank_account.instrument_href)
 
-      @bank_account.account_name = gateway_bank_account.bank_name
+      @bank_account.bank_account_name = gateway_bank_account.bank_name
       @bank_account.last_four = gateway_bank_account.account_number
       @bank_account.gateway_reference_id = gateway_bank_account.id
 
