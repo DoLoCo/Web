@@ -47,12 +47,12 @@ function handleBalancedResponse(response) {
          request.setRequestHeader('Authorization', 'Token token="'+ token +'"');
       },
       success: function (data) {
-        window.alert('Added Bank Account');
+        $('#balanced-form').html('<div data-alert class="alert-box success radius">Success! Your bank account has been configured. You can now close this modal</div>')
       }
     });
     
   } else {
-    window.alert("Bank Account Failed to Add");
+    $('#form-error').show();
   }
 }
 
