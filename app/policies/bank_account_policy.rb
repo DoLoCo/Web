@@ -15,7 +15,7 @@ private
   
   def is_user_permitted?
     if bank_account.ownable_type == BankAccount::OWNABLE_TYPES[:user]
-      ownable.id == user.id
+      bank_account.ownable.id == user.id
     elsif bank_account.ownable_type == BankAccount::OWNABLE_TYPES[:organization]
       bank_account.ownable.is_admin?(user.id)
     end
