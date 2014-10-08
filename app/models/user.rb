@@ -10,7 +10,9 @@ class User < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true, 
+  validates :image_url, presence: true
+  validates :score, presence: true
+  validates :email, presence: true,
                     uniqueness: { if: :check_email_uniqueness },
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, presence: true, 
