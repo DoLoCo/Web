@@ -6,6 +6,7 @@ module Api
       def create
         user = User.new(registration_params)
         if user.save
+          UserAvatarWorker.perform_async(user.user_id)
           token = AuthToken.issue_token({ user_id: user.id })
           render json: { 
             user: UserSerializer.new(user).to_json,

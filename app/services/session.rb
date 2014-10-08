@@ -4,10 +4,7 @@ class Session
     return false if email.blank? || password.blank?
 
     user = User.find_by(email: email)
-    if user && user.authenticate(password)
-    	UserAvatarWorker.perform_async(user.user_id)
-    	return user
-    end
+    return user if user && user.authenticate(password)
     
     return false
   end
