@@ -88,6 +88,8 @@ ActiveRecord::Schema.define(version: 20140917015139) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "image_url"
+    t.float    "score"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
