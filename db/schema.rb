@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917015139) do
+ActiveRecord::Schema.define(version: 20141023015500) do
 
   create_table "bank_accounts", force: true do |t|
     t.string   "bank_account_name"
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 20140917015139) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "image_url"
-    t.float    "score"
+    t.integer  "score",           default: 0
+    t.string   "image_url",       default: ""
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
