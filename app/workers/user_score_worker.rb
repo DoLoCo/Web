@@ -1,4 +1,4 @@
-class UserAvatarWorker
+class UserScoreWorker
   include Sidekiq::Worker
 
   def perform(user_id)
