@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :image_url, presence: true
+  validates :image_url, presence: false
   validates :score, presence: true
   validates :email, presence: true,
                     uniqueness: { if: :check_email_uniqueness },

@@ -10,5 +10,6 @@ class UserAvatarWorker
   	email_hash = Digest::MD5.hexdigest(user.email.gsub(/\s+/, "").downcase);
   	gravatar_url = gravatar_prefix + email_hash;
   	user.update(image_url: gravatar_url);
+	user.save;
   end
 end

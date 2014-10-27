@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023015500) do
+ActiveRecord::Schema.define(version: 20141027011418) do
 
   create_table "bank_accounts", force: true do |t|
     t.string   "bank_account_name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20141023015500) do
     t.date     "target_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_url",       default: ""
   end
 
   add_index "campaigns", ["bank_account_id"], name: "index_campaigns_on_bank_account_id", using: :btree
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 20141023015500) do
     t.decimal  "lng",           precision: 10, scale: 6
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_url",                              default: ""
   end
 
   create_table "users", force: true do |t|
