@@ -15,7 +15,7 @@ module Api
           @campaigns = @campaigns.by_distance_from_coordinates(params[:latitude], params[:longitude])
         end
 
-        if !params[:organization_id]
+        if !params[:organization_id].blank?
           @campaigns = @campaigns.by_organization_id(params[:organization_id])
         end
 
